@@ -16,8 +16,7 @@ public class HomeWork {
      * pow(x,y) = x^y
      */
     double calculate(String expr) {
-
-        return 0;
+        return ExpressionEvaluator.evaluate(expr);
     }
 
 }
