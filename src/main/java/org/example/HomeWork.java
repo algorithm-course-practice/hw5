@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.*;
+
 public class HomeWork {
 
     /**
@@ -15,9 +17,7 @@ public class HomeWork {
      * sqr(x) = x^2 <br/>
      * pow(x,y) = x^y
      */
-    double calculate(String expr) {
-
-        return 0;
+    public  double calculate(String expr) {
+        return ExpressionEvaluator.evaluate(expr);
     }
-
 }
