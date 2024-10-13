@@ -1,13 +1,12 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 
 public class HomeWork {
+
+    static List<String> OPERATORS = asList("+", "-", "*", "/");
 
     /**
      * <h1>Задание 1.</h1>
@@ -22,13 +21,56 @@ public class HomeWork {
      * sqr(x) = x^2 <br/>
      * pow(x,y) = x^y
      */
-    double calculate(String expr) {
+    public double calculate(String expr) {
+        Stack<Double> numbers = new Stack<>();
+        String[] input = expr.split(" ");
+        for (String token : input){
+            if (isNumber(token)){
+                numbers.push(Double.valueOf(token));
+                continue;
+            }
+            double y =numbers.pop();
+            switch (token) {
+                case ("sin"): {
+                    numbers.push(Math.sin(y));
+                    continue;
+                }
+                case ("cos"): {
+                    numbers.push(Math.cos(y));
+                    continue;
+                }
+                case ("sqr"): {
+                    numbers.push(Math.pow(y, 2));
+                }
+                continue;
+            }
+            double x = numbers.pop();
+            switch (token) {
+                case ("pwr"): {
+                    numbers.push(Math.pow(x, y));
+                    continue;
+                }
+                case ("*"): {
+                    numbers.push (x * y);
+                    continue;
+                }
+                case ("/"): {
+                    numbers.push (x / y);
+                    continue;
+                }
+                case ("+"): {
+                    numbers.push (x + y);
+                    continue;
+                }
+                case ("-"): {
+                    numbers.push (x - y);
+                }
+            }
 
-        return 0;
+        }
+        return numbers.pop();
     }
 
-
-    static List<String> OPERATORS = asList("+", "-", "*", "/");
 
 
     /**
@@ -107,8 +149,6 @@ public class HomeWork {
             //Переложить оператор из стека в выходную очередь.
             output.add(stack.pop().toString());
         }
-
-
         return String.join(" ", output);
     }
 

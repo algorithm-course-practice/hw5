@@ -15,7 +15,8 @@ class HomeWorkTest {
         assertEquals("2 3 4 * +", translate("2 + 3 * 4"));
         assertEquals("1 2 + 3 -", translate("1 + 2 - 3"));
         assertEquals("2 3 + 4 *", translate("( ( 2 + 3 ) ) * 4"));
-        assertEquals("2 3 4 * + 5 - 7 6 * 3 / + 2 3 2 * - 5 2 - 2 * +", translate("2 + 3 * 4 - 5 + 7 * 6 / 3 - 2 * 3 2 + ( 5 - 2 ) * 2"));
+        assertEquals("2 3 4 * + 5 - 7 6 * 3 / + 2 32 * - 5 2 - 2 * +",
+                translate("2 + 3 * 4 - 5 + 7 * 6 / 3 - 2 * 32 + ( 5 - 2 ) * 2"));
         assertThrows(IllegalArgumentException.class,() -> translate("( 2 + 3 ) ) * 4"));
         assertThrows(IllegalArgumentException.class,() -> translate("( 2 + 3 d ) ) * 4"));
         assertEquals("1 2 3 * -", translate("1 - 2 * 3"));
@@ -30,7 +31,19 @@ class HomeWorkTest {
                 translate("4 + pwr ( 1 * 2 - 3 , sqr ( 10 + 7 * 6 ) ) + 10 * 3 + cos ( 5 )"));
 
 
-        assertEquals(1.1, 1.1000001, 0.0001);
+        assertEquals(1.1, 1.1000001, 0.1);
+
+        assertEquals(homeWork.calculate(translate("2 + 3 * 4 - 5 + 7 * 6 / 3 - 2 * 32 + ( 5 - 2 ) * 2")), 2 + 3 * 4 - 5 + 7 * 6 / 3 - 2 * 32 + ( 5 - 2 ) * 2, 0.001);
+        assertEquals(homeWork.calculate(translate("1 + 2 * ( 10 / 2 )")), 11.0, 0.001);
+        assertEquals(homeWork.calculate(translate("1 + 2 * ( 10 pwr 2 )")), 201.0, 0.001);
+        assertEquals(homeWork.calculate(translate("1 * 2 + pwr ( 5 , 7 )")), 1 * 2 +  Math.pow(5,  7) , 0.001);
+
+        assertEquals(homeWork.calculate(translate("sin ( 2 + 10 ) / cos ( 1 / 5 )")), -0.5, 0.1);
+        assertEquals(homeWork.calculate(translate("4 + pwr ( 1 * 2 - 3 , sqr ( 10 + 7 * 6 ) ) + 10 * 3 + cos ( 5 )")),
+                4 + Math.pow(1 * 2 - 3, Math.pow(10 + 7 * 6, 2)) + 10 * 3 + Math.cos(5), 0.1);
+        assertEquals(homeWork.calculate(translate("4 + pwr ( 1 * 2 - 3 , sqr ( 10 + 7 * 6 ) ) + 10 * 3 + cos ( 5 )")),
+                35.2, 0.1);
+
     }
 
 }
