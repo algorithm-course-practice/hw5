@@ -8,7 +8,10 @@ import java.util.regex.Pattern;
 
 
 public class HomeWork {
-
+    /**
+     * За основу взял кусочек кода с <a href="https://www.geeksforgeeks.org/how-to-evaluate-math-expression-given-in-string-form-in-java/">Java Code</a>
+     * переработал обработку функций и добавил вычисление мат. функций
+     */
     private static final Map<String, BiFunction<Double, Double, Double>> FUNCTIONS = Map.of(
                 "+" , Double::sum,
                 "-", (x, y) -> y - x,
